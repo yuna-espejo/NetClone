@@ -2,23 +2,25 @@
 
 > **Status: Work in Progress** — actively in development.
 
-A local tool that helps you configure a new router with the same settings (SSID and password) as your old one — so all your connected devices (smart home, phones, laptops) stay connected without manual reconfiguration.
+A local tool for when you switch internet provider and get a new router. You already know your old SSID and password — NetClone automatically detects the new router's IP, opens its admin panel, and applies your credentials. Every device on your network reconnects without any manual reconfiguration.
 
 ---
 
 ## The Problem
 
-When you replace a home router, every device on your network loses its connection. You have to manually reconnect each one — phones, smart TVs, thermostats, cameras, speakers. It's tedious and error-prone, especially with IoT devices that have no screen.
+When you switch provider, your new router comes with a different SSID and password. Every device in your home — phones, smart TVs, thermostats, cameras, speakers — loses its connection. You have to reconfigure each one manually.
 
-NetClone solves this by reading the configuration from your old router and automatically applying it to the new one.
+NetClone eliminates that. You tell it your old SSID and password, it does the rest.
 
 ---
 
 ## How It Works
 
-1. **Detects your network** — automatically finds your router's IP address
-2. **Reads your old router's config** — logs into the admin panel and extracts SSID, password, and settings
-3. **Applies config to the new router** — uses a recipe system (one JSON file per router model) to navigate the new router's admin panel and configure it identically
+1. **Detects your new router's IP** — automatically reads the system routing table, no manual input needed
+2. **Opens the admin panel** — uses Playwright to navigate the router's web interface
+3. **Applies your credentials** — sets the SSID and password you provide, using a recipe specific to your router model
+
+You stay in control. If you want to change the password while you're at it, just type a new one.
 
 ---
 
