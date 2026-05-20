@@ -8,7 +8,7 @@ This module needs to starts the flask web server
 
 '''
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__, template_folder="app/templates")
 
@@ -16,5 +16,18 @@ app = Flask(__name__, template_folder="app/templates")
 def index():
     return render_template("index.html")
 
+@app.route("/apply", methods=["POST"])
+def apply():
+    ssid = request.form.get("ssid")
+    wifi_password = request.form.get("wifi_password")
+    brand = request.form.get("brand")
+    model = request.form.get("model")
+
+    return jsonify({
+        "ssid": ssid,
+        "brand": brand,
+        "model": model,
+        "status": "received"
+    })
 if __name__ == "__main__":
     app.run(debug=True)
