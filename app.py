@@ -9,6 +9,7 @@ This module needs to starts the flask web server
 '''
 
 from flask import Flask, render_template, request, jsonify
+from app.network import get_gateway_ip
 
 app = Flask(__name__, template_folder="app/templates")
 
@@ -18,6 +19,7 @@ def index():
 
 @app.route("/apply", methods=["POST"])
 def apply():
+    gateway = get_gateway_ip()
     ssid = request.form.get("ssid")
     wifi_password = request.form.get("wifi_password")
     brand = request.form.get("brand")
@@ -27,6 +29,7 @@ def apply():
         "ssid": ssid,
         "brand": brand,
         "model": model,
+        "gatway": gateway,
         "status": "received"
     })
 if __name__ == "__main__":
